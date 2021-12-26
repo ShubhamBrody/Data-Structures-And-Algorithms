@@ -80,7 +80,7 @@ void graphPrinter()
     {
         for(auto e : g[i])
         {
-            cout << "From : " << e->from << " To : " << e->to << " with Capacity : " << e->flow << " " << e->capacity << endl;
+            cout << "From : " << e->from << " To : " << e->to << " with Flow : " << e->flow << " and Capacity : " << e->capacity << endl;
         }
     }
 }
@@ -96,9 +96,23 @@ int main() {
         cin >> from >> to >> capacity;
         addEdge(from, to, capacity);
     }
-    graphPrinter();
-    cout << endl;
-    fordfulkersons();
     // graphPrinter();
+    fordfulkersons();
+    cout << endl;
+    graphPrinter();
     cout << "The maximum flow is : " << maxflow;
 }
+// 10 13
+// 0 6 1
+// 0 7 1
+// 1 6 1
+// 1 7 1
+// 1 8 1
+// 2 5 1
+// 2 6 1
+// 2 7 1
+// 2 9 1
+// 3 7 1
+// 4 7 1
+// 4 8 1
+// 4 9 1
