@@ -46,19 +46,19 @@ void dfs(int node, vector<int> g[], vector<int> &in, vector<int> &out, vector<in
     path.pb(node);
 }
 
-void dfscircuitgen(vector<int> g[], int n, int node, vector<int> &path, vector<int> &depth, vector<int> &nodeid, int d = 0)
-{
-    path.pb(node);
-    depth.pb(d);
-    nodeid[node] = path.size()-1;
-    for(int i : g[node])
-    {
-        dfscircuitgen(g, n, i, path, depth, nodeid, d+1);
-        path.pb(node);
-        depth.pb(d);
-        nodeid[node] = path.size()-1;
-    }
-}
+// void dfscircuitgen(vector<int> g[], int n, int node, vector<int> &path, vector<int> &depth, vector<int> &nodeid, int d = 0)
+// {
+//     path.pb(node);
+//     depth.pb(d);
+//     nodeid[node] = path.size()-1;
+//     for(int i : g[node])
+//     {
+//         dfscircuitgen(g, n, i, path, depth, nodeid, d+1);
+//         path.pb(node);
+//         depth.pb(d);
+//         nodeid[node] = path.size()-1;
+//     }
+// }
 
 bool eulerpath(vector<int> g[], int n, int m, vector<int> &path)
 {
@@ -80,7 +80,7 @@ bool eulerpath(vector<int> g[], int n, int m, vector<int> &path)
     }
 }
 
-bool eulercircuit(vector<int> g[], int n, vector<int> &path, vector<int> &depth, int start, vector<int> &nodeid)
-{
-    dfscircuitgen(g, n, start, path, depth, nodeid);
-}
+// bool eulercircuit(vector<int> g[], int n, vector<int> &path, vector<int> &depth, int start, vector<int> &nodeid)
+// {
+//     dfscircuitgen(g, n, start, path, depth, nodeid);
+// }

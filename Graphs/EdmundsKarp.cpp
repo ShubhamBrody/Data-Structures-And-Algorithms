@@ -42,32 +42,53 @@ void addEdge(int from, int to, int capacity) // to add an edge and also to creat
     g[to].pb(e2);
 }
 
-int dfs(int node, int flow) 
+int bfs() 
 {
-    if(node == t) return flow;
-    visited[node] = visitedToken;
-    for(auto edge : g[node]){
-        if(edge->remainingCapacity() > 0 && visited[edge->to] != visitedToken){
-            int bottleneck = dfs(edge->to, min(flow, edge->remainingCapacity()));
-
-            if(bottleneck > 0)
+    queue<int> q;
+    q.push(s);
+    visited[s] = visitedToken;
+    vector<Edge*> par(n, nullptr);
+    while(!q.empty())
+    {
+        int curr = q.front(); q.pop();
+        // cout << curr << endl;
+        if(curr == t)
+        break;
+        for(auto node : g[curr])
+        {
+            if(node->remainingCapacity()>0 && visited[node->to] != visitedToken)
             {
-                cout << "BEFORE : From : " << edge->from << " To : " << edge->to << " with Capacity : " << edge->remainingCapacity() << endl;
-                edge->augument(bottleneck);
-                cout << "AFTER  : From : " << edge->from << " To : " << edge->to << " with Capacity : " << edge->remainingCapacity() << endl;
-                return bottleneck;
+                visited[node->to] = visitedToken;
+                par[node->to] = node;
+                q.push(node->to);
             }
         }
     }
-    return 0;
+
+    if(par[t] == nullptr) return 0;
+    int bottleneck = INT_MAX;
+
+    int curr = t;
+    while(par[curr] != nullptr)
+    {
+        bottleneck = min(bottleneck, par[curr]->remainingCapacity());
+        curr = par[curr]->from;
+    }
+    
+    curr = t;
+    while(par[curr] != nullptr)
+    {
+        par[curr]->augument(bottleneck);
+        curr = par[curr]->from;
+    }
+
+    return bottleneck;
 }
 
 //algorithm initiator method of the program
-void fordfulkersons()
+void edmundskarp()
 {
-    int maxval = INT_MAX/2;
-    // cout << "Came here" << endl;
-    for(int f = dfs(s, maxval); f!=0; f = dfs(s, maxval))
+    for(int f = bfs(); f!=0; f = bfs())
     {
         maxflow += f;
         visitedToken++;
@@ -96,9 +117,33 @@ int main() {
         cin >> from >> to >> capacity;
         addEdge(from, to, capacity);
     }
-    // graphPrinter();
-    fordfulkersons();
+    graphPrinter();
+    edmundskarp();
     cout << endl;
     graphPrinter();
     cout << "The maximum flow is : " << maxflow;
 }
+// 12 10 11 23
+// 0 6 1
+// 0 7 1
+// 1 6 1
+// 1 7 1
+// 1 8 1
+// 2 5 1
+// 2 6 1
+// 2 7 1
+// 2 9 1
+// 3 7 1
+// 4 7 1
+// 4 8 1
+// 4 9 1
+// 10 0 1
+// 10 1 1
+// 10 2 1
+// 10 3 1
+// 10 4 1
+// 5 11 1
+// 6 11 1
+// 7 11 1
+// 8 11 1
+// 9 11 1

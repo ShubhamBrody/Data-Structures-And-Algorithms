@@ -34,8 +34,8 @@ int main()
     vector<int> path;
     vector<int> depth;
     vector<int> nodeid(n);
-    // eulerpath(g, n, m, path);
-    eulercircuit(g, n, path, depth, start, nodeid);
+    eulerpath(g, n, m, path);
+    // eulercircuit(g, n, path, depth, start, nodeid);
     // reverse(path.begin(), path.end());
     // reverse(depth.begin(), depth.end());
     for(int i = 0; i < path.size(); i++){
