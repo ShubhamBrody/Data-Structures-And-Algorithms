@@ -26,7 +26,7 @@ void minidxpreprocess(int n)
         int p2 = pow(2, i);
         int p3 = pow(2, i-1);
         for(int j = 0 ; j <= n-p2; j++){
-            spt[i][j] = min(spt[i-1][j], spt[i-1][j+p3]);
+            // spt[i][j] = min(spt[i-1][j], spt[i-1][j+p3]);
             if(spt[i-1][j] < spt[i-1][j+p3])
             {
                 spt[i][j] = spt[i-1][j];
