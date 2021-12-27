@@ -19,9 +19,7 @@ void Edge::augument(int bottleneck) {
 }
 
 int n, s, t;
-int visitedToken = 1;
 int maxflow = 0;
-vector<int> visited;
 vector<int> level; //to keep the levels of nodes helps in dfds traversal
 vector<vector<Edge*>> g;
 
@@ -62,7 +60,6 @@ bool inc = true;
 int dfstraversal(int node, vector<int> &next, int flow) {
     if(inc) counter++, inc = false;
     if(node == t) return flow;
-    visited[node] = visitedToken;
     for(; next[node] < g[node].size(); next[node]++){
         cout << counter << " --> " << node << " --> " << next[node] << endl;
         Edge* edge = g[node][next[node]];
@@ -102,7 +99,6 @@ void dinicsalgo() {
             inc = true;
             maxflow += f;
         }
-        visitedToken++;
     }
 }
 
@@ -110,7 +106,6 @@ int main() {
     int m;
     cin >> n >> s >> t >> m;
     g.resize(n);
-    visited.resize(n);
     level.resize(n);
     while(m--)
     {
