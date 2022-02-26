@@ -60,7 +60,7 @@ bool inc = true;
 int dfstraversal(int node, vector<int> &next, int flow) {
     if(inc) counter++, inc = false;
     if(node == t) return flow;
-    for(; next[node] < g[node].size(); next[node]++){
+    for(; next[node] < g[node].size(); next[node]++) {
         cout << counter << " --> " << node << " --> " << next[node] << endl;
         Edge* edge = g[node][next[node]];
         if(level[edge->to] == level[node]+1 && edge->remainingCapacity() > 0)
@@ -86,7 +86,7 @@ void nextprint(vector<int> next)
 }
 
 void dinicsalgo() {
-    //used here for Shimon Even and Alon Itai optimisation for puning dead-ends
+    //used here for Shimon Even and Alon Itai optimisation for pruning dead-ends
     vector<int> next(n, 0);
 
     while(bfslevelgen()) {
